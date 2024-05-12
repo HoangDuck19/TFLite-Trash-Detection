@@ -1,4 +1,5 @@
 import cv2
+import serial
 import numpy as np
 
 # Load Yolo
@@ -50,8 +51,7 @@ def detect_object(img):
                 confidences.append(float(confidence))
                 class_ids.append(class_id)
 
-    indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
-    print(indexes)
+    indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
     font = cv2.FONT_ITALIC = 16
     for i in range(len(boxes)):
         if i in indexes:
@@ -59,7 +59,7 @@ def detect_object(img):
             label = str(classes[class_ids[i]])
             cv2.rectangle(img, (x, y), (x + w, y + h), (255,0,0), 1)
             cv2.putText(img, label, (x, y + 30), font, 1, (255,0,0), 2)
-return img1
+return img
 
 while True:
     cap = cv2.VideoCapture(0)
