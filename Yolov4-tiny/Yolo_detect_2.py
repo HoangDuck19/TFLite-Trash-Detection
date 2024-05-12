@@ -57,9 +57,9 @@ def detect_object(img):
         if i in indexes:
             x, y, w, h = boxes[i]
             label = str(classes[class_ids[i]])
-            color = colors[i]
-            cv2.rectangle(img, (x, y), (x + w, y + h), color, 1)
-            cv2.putText(img, label, (x, y + 30), font, 1, color, 2)
+            cv2.rectangle(img, (x, y), (x + w, y + h), (255,0,0), 1)
+            cv2.putText(img, label, (x, y + 30), font, 1, (255,0,0), 2)
+return img1
 
 while True:
     cap = cv2.VideoCapture(0)
@@ -70,14 +70,11 @@ while True:
             cv2.imwrite('baocao1.jpg', frame)
         else:
             print("No Camera")
-        image = cv2.imread(r"D:\AI Challenge\Yolov4 Tiny\dataset\NCKH\Bottle\bottle_531.jpg")
+        image = cv2.imread(r"/home/hoanghai/tflite1/Run/TFLite-Trash-Detection/Yolov4-tiny/baocao1.jpg")
         image = cv2.resize(image, (416, 416))
         print('Processing...')
 
-        bbox, label, conf = detect_object(image)
+        img1 = detect_object(image)
         print("Passed")
         cv2.imwrite("result.jpg", img1)
-    cap.release()
-cv2.imshow("Image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+    cap.release()
